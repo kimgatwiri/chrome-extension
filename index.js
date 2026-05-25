@@ -1,10 +1,22 @@
-myLeads=[]
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js"
+const firebaseConfig={
+    databaseURL:"https://leads-tracker-app-83138-default-rtdb.europe-west1.firebasedatabase.app/"
+}
+const app=initializeApp(firebaseConfig)
+const database=getDatabase(app)
+console.log(database)
+
+
+let myLeads=[]
 const inputEl=document.getElementById("input-el")
 const  inputBtn=document.getElementById("input-btn")
 const deleteBtn=document.getElementById("delete-btn")
 const ulEl=document.getElementById("ul-el")
 const leadsFromLocalStorage=JSON.parse(localStorage.getItem("myLeads"))
 const tabBtn=document.getElementById("tab-btn")
+
+
 if(leadsFromLocalStorage){
     myLeads=leadsFromLocalStorage
     render(myLeads)
