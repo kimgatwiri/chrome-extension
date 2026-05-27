@@ -1,11 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js"
 const firebaseConfig={
-    databaseURL:"https://leads-tracker-app-83138-default-rtdb.europe-west1.firebasedatabase.app/"
+    
+    databaseURL:config.DATABASE_URL
 }
 const app=initializeApp(firebaseConfig)
 const database=getDatabase(app)
-console.log(database)
+console.log(firebaseConfig.databaseURL)
 
 
 let myLeads=[]
@@ -21,20 +22,18 @@ if(leadsFromLocalStorage){
     myLeads=leadsFromLocalStorage
     render(myLeads)
 }
-const tabs=[{
-    url:"https://www.linkedin.com/in/per-harald-borgen"
-}]
 
-tabBtn.addEventListener("click",function(){
+
+// tabBtn.addEventListener("click",function(){
     
-    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
-    myLeads.push(tabs[0].url)
-    localStorage.setItem("myLeads",JSON.stringify(myLeads))
-    render(myLeads)
-    })
+//     chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+//     myLeads.push(tabs[0].url)
+//     localStorage.setItem("myLeads",JSON.stringify(myLeads))
+//     render(myLeads)
+//     })
     
     
-})
+// })
 
 function render(Leads){
 let listItems=""
