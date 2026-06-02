@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"
-import { getDatabase,ref,push } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js"
+import { getDatabase,ref,push,onValue} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js"
 const firebaseConfig={
     
     databaseURL:config.DATABASE_URL
@@ -32,7 +32,11 @@ const tabBtn=document.getElementById("tab-btn")
     
     
 // })
-
+onValue(referenceInDb, function(snapshot){
+    console.log(snapshot.val())
+   
+   
+})
 function render(Leads){
 let listItems=""
 
