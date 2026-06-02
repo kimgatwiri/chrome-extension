@@ -1,15 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"
-import { getDatabase } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js"
+import { getDatabase,ref,push } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js"
 const firebaseConfig={
     
     databaseURL:config.DATABASE_URL
 }
 const app=initializeApp(firebaseConfig)
 const database=getDatabase(app)
+const referenceInDb=ref(database,"leads")
 console.log(firebaseConfig.databaseURL)
 
 
-let myLeads=[]
+
 const inputEl=document.getElementById("input-el")
 const  inputBtn=document.getElementById("input-btn")
 const deleteBtn=document.getElementById("delete-btn")
@@ -48,19 +49,21 @@ for(let i=0;i<Leads.length;i++){
 ulEl.innerHTML= listItems
 }
 
-inputBtn.addEventListener("click",function(){
-    myLeads.push(inputEl.value)
-    inputEl.value=""
+inputBtn.addEventListener("click",async function(){
+ try { await push(referenceInDb,inputEl.value)
+    inputEl.value=""}
     
+    catch(err){
+        console.error(err)
+    }
     
-    
-    render(myLeads)
+
    
     
 })
 
 deleteBtn.addEventListener("dblclick",function(){
     
-    myLeads=[]
-    render(myLeads)
+    
+ 
 })
